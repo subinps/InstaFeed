@@ -1,0 +1,7 @@
+pyrogram
+tgcrypto
+instaloader
+requests
+tzlocal
+apscheduler
+python-dotenv
