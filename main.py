@@ -21,6 +21,7 @@ log = getLogger(__name__)
 feedChatID = int(getenv("FEED_CHAT_ID", 0))  # chat ID to send Instagram feeds
 storyChatID = int(getenv("STORY_CHAT_ID", 0))  # chat ID to send Instagram stories
 username = getenv("USERNAME")  # your Instagram username
+session_file_id = getenv("INSTA_SESSIONFILE_ID") # get session file
 
 
 RUNNING = {}
@@ -30,7 +31,8 @@ bot = Client(
 )
 
 L = instaloader.Instaloader()
-L.load_session_from_file(username)  # type: ignore
+await bot.download_media(session_file_id, file_name=f"./{username}")
+L.load_session_from_file(username, filename=f"./{username}")
 
 scheduler = AsyncIOScheduler(timezone=str(tzlocal.get_localzone()))
 
